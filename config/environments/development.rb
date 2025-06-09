@@ -48,6 +48,9 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # Configure Active Storage service
+  config.active_storage.service = :local
+
   config.generators do |generator|
     generator.helper false
     generator.assets false

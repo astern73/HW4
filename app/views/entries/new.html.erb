@@ -2,7 +2,7 @@
   <div class="col-md-8">
     <h1 class="mb-4">New Entry</h1>
 
-    <form action="/entries" method="post">
+    <form action="/entries" method="post" enctype="multipart/form-data">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
 
@@ -16,9 +16,15 @@
         <textarea name="description" id="description_input" class="form-control" rows="4" placeholder="Describe your experience..." required></textarea>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-3">
         <label for="occurred_on_input" class="form-label">Date</label>
         <input type="date" name="occurred_on" id="occurred_on_input" class="form-control" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="image_input" class="form-label">Image (optional)</label>
+        <input type="file" name="image" id="image_input" class="form-control" accept="image/*">
+        <div class="form-text">Choose a photo to attach to this entry.</div>
       </div>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
