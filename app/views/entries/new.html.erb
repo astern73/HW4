@@ -1,22 +1,30 @@
-<h1>New Entry</h1>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1 class="mb-4">New Entry</h1>
 
-<form action="/entries" method="post">
-  <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
+    <form action="/entries" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
 
-  <p>
-    <label for="title_input">Title</label>
-    <input type="text" name="title" id="title_input">
-  </p>
+      <div class="mb-3">
+        <label for="title_input" class="form-label">Title</label>
+        <input type="text" name="title" id="title_input" class="form-control" placeholder="Enter entry title" required>
+      </div>
 
-  <p>
-    <label for="description_input">Description</label>
-    <input type="text" name="description" id="description_input">
-  </p>
+      <div class="mb-3">
+        <label for="description_input" class="form-label">Description</label>
+        <textarea name="description" id="description_input" class="form-control" rows="4" placeholder="Describe your experience..." required></textarea>
+      </div>
 
-  <p>
-    <label for="occurred_on_input">Occurred On</label>
-    <input type="date" name="occurred_on" id="occurred_on_input">
-  </p>
+      <div class="mb-4">
+        <label for="occurred_on_input" class="form-label">Date</label>
+        <input type="date" name="occurred_on" id="occurred_on_input" class="form-control" required>
+      </div>
 
-  <button>Save</button>
-</form>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/places/<%= params["place_id"] %>" class="btn btn-outline-secondary me-md-2">Cancel</a>
+        <button type="submit" class="btn btn-success">Save Entry</button>
+      </div>
+    </form>
+  </div>
+</div>
