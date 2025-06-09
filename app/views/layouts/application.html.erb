@@ -6,20 +6,45 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
 
   <body>
-    <div>
-      <%= flash["notice"] %>
-    </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/sessions/destroy">Logout</a>
-      <a href="/sessions/new">Login</a>
-      <a href="/users/new">Signup</a>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Tacostagram</a>
+        
+        <div class="navbar-nav ms-auto">
+          <% if @current_user %>
+            <a class="nav-link" href="/users/<%= @current_user.id %>"><%= @current_user.username %></a>
+            <form action="/sessions/destroy" method="post" class="d-inline">
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+            </form>
+          <% else %>
+            <a class="nav-link" href="/sessions/new">Login</a>
+            <a class="nav-link" href="/users/new">Signup</a>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Bootstrap Container -->
+    <div class="container mt-4">
+      <% if flash["notice"] %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= flash["notice"] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+
+      <%= yield %>
     </div>
 
-    <%= yield %>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
